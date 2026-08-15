@@ -1,0 +1,9 @@
+apiVersion: devflow.ai/v1
+kind: Skill
+metadata: {id: incident_data_analysis, name: Incident Data Analysis, version: 1.0.0}
+spec:
+  description: Analyze bounded service metrics and identify anomaly windows; read-only.
+  allowed_tools: [query_metrics]
+  required_permissions: [observability:read]
+  risk_level: read
+

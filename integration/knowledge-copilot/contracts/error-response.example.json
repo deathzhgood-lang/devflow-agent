@@ -1,0 +1,9 @@
+{
+  "error": {
+    "code": "tenant_forbidden",
+    "message": "The service token is not authorized for this tenant.",
+    "retryable": false,
+    "request_id": "req_devflow_example_001"
+  }
+}
+

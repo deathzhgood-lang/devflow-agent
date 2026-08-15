@@ -1,0 +1,46 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      DEVFLOW_DB_PATH: runtime_data/devflow.db
+      DEVFLOW_REPORT_DIR: runtime_data/reports
+      DEVFLOW_TOOL_MODE: ${DEVFLOW_TOOL_MODE:-mcp}
+      DEVFLOW_MCP_TIMEOUT_SECONDS: ${DEVFLOW_MCP_TIMEOUT_SECONDS:-10}
+      DEVFLOW_MCP_MAX_RETRIES: ${DEVFLOW_MCP_MAX_RETRIES:-1}
+      DEVFLOW_KNOWLEDGE_MODE: ${DEVFLOW_KNOWLEDGE_MODE:-fixture}
+      KNOWLEDGE_API_BASE: ${KNOWLEDGE_API_BASE:-}
+      KNOWLEDGE_API_TOKEN: ${KNOWLEDGE_API_TOKEN:-}
+      KNOWLEDGE_TIMEOUT_SECONDS: ${KNOWLEDGE_TIMEOUT_SECONDS:-35}
+      KNOWLEDGE_MAX_RETRIES: ${KNOWLEDGE_MAX_RETRIES:-1}
+      KNOWLEDGE_FIXTURE_FALLBACK: ${KNOWLEDGE_FIXTURE_FALLBACK:-true}
+      DEVFLOW_CORS_ORIGINS: http://localhost:3000,http://127.0.0.1:3000
+      DEVFLOW_LLM_ENABLED: ${DEVFLOW_LLM_ENABLED:-false}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL:-https://api.deepseek.com}
+      DEEPSEEK_MODEL: ${DEEPSEEK_MODEL:-deepseek-v4-flash}
+      DEEPSEEK_THINKING: ${DEEPSEEK_THINKING:-false}
+      DEVFLOW_LLM_TIMEOUT_SECONDS: ${DEVFLOW_LLM_TIMEOUT_SECONDS:-30}
+      DEVFLOW_LLM_MAX_TOKENS: ${DEVFLOW_LLM_MAX_TOKENS:-4096}
+      DEVFLOW_LLM_FALLBACK_ENABLED: ${DEVFLOW_LLM_FALLBACK_ENABLED:-true}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./runtime_data:/app/runtime_data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_BASE: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy

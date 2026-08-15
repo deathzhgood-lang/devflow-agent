@@ -1,0 +1,577 @@
+{
+    "openapi":  "3.1.0",
+    "info":  {
+                 "title":  "Enterprise Knowledge Copilot Service API",
+                 "description":  "Tenant-safe retrieval boundary for trusted external agents.",
+                 "version":  "1.0.0"
+             },
+    "paths":  {
+                  "/health":  {
+                                  "get":  {
+                                              "tags":  [
+                                                           "Service Retrieval API"
+                                                       ],
+                                              "summary":  "Lightweight retrieval readiness check",
+                                              "operationId":  "service_health_health_get",
+                                              "responses":  {
+                                                                "200":  {
+                                                                            "description":  "Successful Response",
+                                                                            "content":  {
+                                                                                            "application/json":  {
+                                                                                                                     "schema":  {
+                                                                                                                                    "$ref":  "#/components/schemas/ServiceHealthResponse"
+                                                                                                                                }
+                                                                                                                 }
+                                                                                        }
+                                                                        }
+                                                            }
+                                          }
+                              },
+                  "/api/v1/retrieval/query":  {
+                                                  "post":  {
+                                                               "tags":  [
+                                                                            "Service Retrieval API"
+                                                                        ],
+                                                               "summary":  "Retrieve tenant-authorized evidence for an external agent",
+                                                               "description":  "Service Bearer authentication. ACL and metadata filters run before retrieval. Evidence is untrusted data, never instructions.",
+                                                               "operationId":  "retrieval_query_api_v1_retrieval_query_post",
+                                                               "security":  [
+                                                                                {
+                                                                                    "ServiceToken":  [
+
+                                                                                                     ]
+                                                                                }
+                                                                            ],
+                                                               "parameters":  [
+                                                                                  {
+                                                                                      "name":  "X-Request-ID",
+                                                                                      "in":  "header",
+                                                                                      "required":  true,
+                                                                                      "schema":  {
+                                                                                                     "type":  "string",
+                                                                                                     "title":  "X-Request-Id"
+                                                                                                 }
+                                                                                  }
+                                                                              ],
+                                                               "requestBody":  {
+                                                                                   "required":  true,
+                                                                                   "content":  {
+                                                                                                   "application/json":  {
+                                                                                                                            "schema":  {
+                                                                                                                                           "$ref":  "#/components/schemas/RetrievalQueryRequest"
+                                                                                                                                       }
+                                                                                                                        }
+                                                                                               }
+                                                                               },
+                                                               "responses":  {
+                                                                                 "200":  {
+                                                                                             "description":  "Successful Response",
+                                                                                             "content":  {
+                                                                                                             "application/json":  {
+                                                                                                                                      "schema":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/RetrievalQueryResponse"
+                                                                                                                                                 }
+                                                                                                                                  }
+                                                                                                         }
+                                                                                         },
+                                                                                 "401":  {
+                                                                                             "content":  {
+                                                                                                             "application/json":  {
+                                                                                                                                      "schema":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/ErrorResponse"
+                                                                                                                                                 }
+                                                                                                                                  }
+                                                                                                         },
+                                                                                             "description":  "Unauthorized"
+                                                                                         },
+                                                                                 "403":  {
+                                                                                             "content":  {
+                                                                                                             "application/json":  {
+                                                                                                                                      "schema":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/ErrorResponse"
+                                                                                                                                                 }
+                                                                                                                                  }
+                                                                                                         },
+                                                                                             "description":  "Forbidden"
+                                                                                         },
+                                                                                 "422":  {
+                                                                                             "content":  {
+                                                                                                             "application/json":  {
+                                                                                                                                      "schema":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/ErrorResponse"
+                                                                                                                                                 }
+                                                                                                                                  }
+                                                                                                         },
+                                                                                             "description":  "Unprocessable Entity"
+                                                                                         },
+                                                                                 "429":  {
+                                                                                             "content":  {
+                                                                                                             "application/json":  {
+                                                                                                                                      "schema":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/ErrorResponse"
+                                                                                                                                                 }
+                                                                                                                                  }
+                                                                                                         },
+                                                                                             "description":  "Too Many Requests"
+                                                                                         },
+                                                                                 "500":  {
+                                                                                             "content":  {
+                                                                                                             "application/json":  {
+                                                                                                                                      "schema":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/ErrorResponse"
+                                                                                                                                                 }
+                                                                                                                                  }
+                                                                                                         },
+                                                                                             "description":  "Internal Server Error"
+                                                                                         },
+                                                                                 "503":  {
+                                                                                             "content":  {
+                                                                                                             "application/json":  {
+                                                                                                                                      "schema":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/ErrorResponse"
+                                                                                                                                                 }
+                                                                                                                                  }
+                                                                                                         },
+                                                                                             "description":  "Service Unavailable"
+                                                                                         },
+                                                                                 "504":  {
+                                                                                             "content":  {
+                                                                                                             "application/json":  {
+                                                                                                                                      "schema":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/ErrorResponse"
+                                                                                                                                                 }
+                                                                                                                                  }
+                                                                                                         },
+                                                                                             "description":  "Gateway Timeout"
+                                                                                         }
+                                                                             }
+                                                           }
+                                              }
+              },
+    "components":  {
+                       "schemas":  {
+                                       "ErrorDetail":  {
+                                                           "properties":  {
+                                                                              "code":  {
+                                                                                           "type":  "string",
+                                                                                           "title":  "Code"
+                                                                                       },
+                                                                              "message":  {
+                                                                                              "type":  "string",
+                                                                                              "title":  "Message"
+                                                                                          },
+                                                                              "retryable":  {
+                                                                                                "type":  "boolean",
+                                                                                                "title":  "Retryable"
+                                                                                            },
+                                                                              "request_id":  {
+                                                                                                 "anyOf":  [
+                                                                                                               {
+                                                                                                                   "type":  "string"
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "type":  "null"
+                                                                                                               }
+                                                                                                           ],
+                                                                                                 "title":  "Request Id"
+                                                                                             }
+                                                                          },
+                                                           "additionalProperties":  false,
+                                                           "type":  "object",
+                                                           "required":  [
+                                                                            "code",
+                                                                            "message",
+                                                                            "retryable"
+                                                                        ],
+                                                           "title":  "ErrorDetail"
+                                                       },
+                                       "ErrorResponse":  {
+                                                             "properties":  {
+                                                                                "error":  {
+                                                                                              "$ref":  "#/components/schemas/ErrorDetail"
+                                                                                          }
+                                                                            },
+                                                             "additionalProperties":  false,
+                                                             "type":  "object",
+                                                             "required":  [
+                                                                              "error"
+                                                                          ],
+                                                             "title":  "ErrorResponse"
+                                                         },
+                                       "EvidenceMetadata":  {
+                                                                "properties":  {
+                                                                                   "service":  {
+                                                                                                   "anyOf":  [
+                                                                                                                 {
+                                                                                                                     "type":  "string"
+                                                                                                                 },
+                                                                                                                 {
+                                                                                                                     "type":  "null"
+                                                                                                                 }
+                                                                                                             ],
+                                                                                                   "title":  "Service"
+                                                                                               },
+                                                                                   "heading":  {
+                                                                                                   "anyOf":  [
+                                                                                                                 {
+                                                                                                                     "type":  "string"
+                                                                                                                 },
+                                                                                                                 {
+                                                                                                                     "type":  "null"
+                                                                                                                 }
+                                                                                                             ],
+                                                                                                   "title":  "Heading"
+                                                                                               },
+                                                                                   "page_start":  {
+                                                                                                      "anyOf":  [
+                                                                                                                    {
+                                                                                                                        "type":  "integer"
+                                                                                                                    },
+                                                                                                                    {
+                                                                                                                        "type":  "null"
+                                                                                                                    }
+                                                                                                                ],
+                                                                                                      "title":  "Page Start"
+                                                                                                  },
+                                                                                   "page_end":  {
+                                                                                                    "anyOf":  [
+                                                                                                                  {
+                                                                                                                      "type":  "integer"
+                                                                                                                  },
+                                                                                                                  {
+                                                                                                                      "type":  "null"
+                                                                                                                  }
+                                                                                                              ],
+                                                                                                    "title":  "Page End"
+                                                                                                },
+                                                                                   "updated_at":  {
+                                                                                                      "anyOf":  [
+                                                                                                                    {
+                                                                                                                        "type":  "string"
+                                                                                                                    },
+                                                                                                                    {
+                                                                                                                        "type":  "null"
+                                                                                                                    }
+                                                                                                                ],
+                                                                                                      "title":  "Updated At"
+                                                                                                  },
+                                                                                   "tags":  {
+                                                                                                "items":  {
+                                                                                                              "type":  "string"
+                                                                                                          },
+                                                                                                "type":  "array",
+                                                                                                "title":  "Tags"
+                                                                                            },
+                                                                                   "untrusted_retrieved_content":  {
+                                                                                                                       "type":  "boolean",
+                                                                                                                       "const":  true,
+                                                                                                                       "title":  "Untrusted Retrieved Content",
+                                                                                                                       "default":  true
+                                                                                                                   }
+                                                                               },
+                                                                "additionalProperties":  false,
+                                                                "type":  "object",
+                                                                "title":  "EvidenceMetadata"
+                                                            },
+                                       "RetrievalEvidence":  {
+                                                                 "properties":  {
+                                                                                    "chunk_id":  {
+                                                                                                     "type":  "string",
+                                                                                                     "title":  "Chunk Id"
+                                                                                                 },
+                                                                                    "document_id":  {
+                                                                                                        "type":  "string",
+                                                                                                        "title":  "Document Id"
+                                                                                                    },
+                                                                                    "title":  {
+                                                                                                  "type":  "string",
+                                                                                                  "title":  "Title"
+                                                                                              },
+                                                                                    "quote":  {
+                                                                                                  "type":  "string",
+                                                                                                  "title":  "Quote"
+                                                                                              },
+                                                                                    "source_uri":  {
+                                                                                                       "type":  "string",
+                                                                                                       "title":  "Source Uri"
+                                                                                                   },
+                                                                                    "score":  {
+                                                                                                  "type":  "number",
+                                                                                                  "maximum":  1.0,
+                                                                                                  "minimum":  0.0,
+                                                                                                  "title":  "Score"
+                                                                                              },
+                                                                                    "document_type":  {
+                                                                                                          "type":  "string",
+                                                                                                          "title":  "Document Type"
+                                                                                                      },
+                                                                                    "metadata":  {
+                                                                                                     "$ref":  "#/components/schemas/EvidenceMetadata"
+                                                                                                 }
+                                                                                },
+                                                                 "additionalProperties":  false,
+                                                                 "type":  "object",
+                                                                 "required":  [
+                                                                                  "chunk_id",
+                                                                                  "document_id",
+                                                                                  "title",
+                                                                                  "quote",
+                                                                                  "source_uri",
+                                                                                  "score",
+                                                                                  "document_type",
+                                                                                  "metadata"
+                                                                              ],
+                                                                 "title":  "RetrievalEvidence"
+                                                             },
+                                       "RetrievalFilters":  {
+                                                                "properties":  {
+                                                                                   "service":  {
+                                                                                                   "anyOf":  [
+                                                                                                                 {
+                                                                                                                     "type":  "string",
+                                                                                                                     "maxLength":  120,
+                                                                                                                     "minLength":  1
+                                                                                                                 },
+                                                                                                                 {
+                                                                                                                     "type":  "null"
+                                                                                                                 }
+                                                                                                             ],
+                                                                                                   "title":  "Service"
+                                                                                               },
+                                                                                   "document_types":  {
+                                                                                                          "items":  {
+                                                                                                                        "type":  "string"
+                                                                                                                    },
+                                                                                                          "type":  "array",
+                                                                                                          "maxItems":  20,
+                                                                                                          "title":  "Document Types"
+                                                                                                      },
+                                                                                   "tags":  {
+                                                                                                "items":  {
+                                                                                                              "type":  "string"
+                                                                                                          },
+                                                                                                "type":  "array",
+                                                                                                "maxItems":  20,
+                                                                                                "title":  "Tags"
+                                                                                            }
+                                                                               },
+                                                                "additionalProperties":  false,
+                                                                "type":  "object",
+                                                                "title":  "RetrievalFilters"
+                                                            },
+                                       "RetrievalLatency":  {
+                                                                "properties":  {
+                                                                                   "total_ms":  {
+                                                                                                    "type":  "integer",
+                                                                                                    "minimum":  0.0,
+                                                                                                    "title":  "Total Ms"
+                                                                                                },
+                                                                                   "retrieval_ms":  {
+                                                                                                        "type":  "integer",
+                                                                                                        "minimum":  0.0,
+                                                                                                        "title":  "Retrieval Ms"
+                                                                                                    },
+                                                                                   "reranker_ms":  {
+                                                                                                       "anyOf":  [
+                                                                                                                     {
+                                                                                                                         "type":  "integer",
+                                                                                                                         "minimum":  0.0
+                                                                                                                     },
+                                                                                                                     {
+                                                                                                                         "type":  "null"
+                                                                                                                     }
+                                                                                                                 ],
+                                                                                                       "title":  "Reranker Ms"
+                                                                                                   }
+                                                                               },
+                                                                "additionalProperties":  false,
+                                                                "type":  "object",
+                                                                "required":  [
+                                                                                 "total_ms",
+                                                                                 "retrieval_ms"
+                                                                             ],
+                                                                "title":  "RetrievalLatency"
+                                                            },
+                                       "RetrievalQueryRequest":  {
+                                                                     "properties":  {
+                                                                                        "query":  {
+                                                                                                      "type":  "string",
+                                                                                                      "maxLength":  2000,
+                                                                                                      "minLength":  2,
+                                                                                                      "title":  "Query"
+                                                                                                  },
+                                                                                        "tenant_id":  {
+                                                                                                          "type":  "string",
+                                                                                                          "maxLength":  120,
+                                                                                                          "minLength":  1,
+                                                                                                          "pattern":  "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+                                                                                                          "title":  "Tenant Id"
+                                                                                                      },
+                                                                                        "user_id":  {
+                                                                                                        "type":  "string",
+                                                                                                        "maxLength":  120,
+                                                                                                        "minLength":  1,
+                                                                                                        "pattern":  "^[A-Za-z0-9][A-Za-z0-9._:@+-]*$",
+                                                                                                        "title":  "User Id"
+                                                                                                    },
+                                                                                        "groups":  {
+                                                                                                       "items":  {
+                                                                                                                     "type":  "string"
+                                                                                                                 },
+                                                                                                       "type":  "array",
+                                                                                                       "maxItems":  50,
+                                                                                                       "title":  "Groups"
+                                                                                                   },
+                                                                                        "filters":  {
+                                                                                                        "$ref":  "#/components/schemas/RetrievalFilters"
+                                                                                                    },
+                                                                                        "top_k":  {
+                                                                                                      "anyOf":  [
+                                                                                                                    {
+                                                                                                                        "type":  "integer",
+                                                                                                                        "maximum":  20.0,
+                                                                                                                        "minimum":  1.0
+                                                                                                                    },
+                                                                                                                    {
+                                                                                                                        "type":  "null"
+                                                                                                                    }
+                                                                                                                ],
+                                                                                                      "title":  "Top K"
+                                                                                                  },
+                                                                                        "request_id":  {
+                                                                                                           "type":  "string",
+                                                                                                           "maxLength":  128,
+                                                                                                           "minLength":  1,
+                                                                                                           "pattern":  "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+                                                                                                           "title":  "Request Id"
+                                                                                                       }
+                                                                                    },
+                                                                     "additionalProperties":  false,
+                                                                     "type":  "object",
+                                                                     "required":  [
+                                                                                      "query",
+                                                                                      "tenant_id",
+                                                                                      "user_id",
+                                                                                      "request_id"
+                                                                                  ],
+                                                                     "title":  "RetrievalQueryRequest"
+                                                                 },
+                                       "RetrievalQueryResponse":  {
+                                                                      "properties":  {
+                                                                                         "query_id":  {
+                                                                                                          "type":  "string",
+                                                                                                          "title":  "Query Id"
+                                                                                                      },
+                                                                                         "request_id":  {
+                                                                                                            "type":  "string",
+                                                                                                            "title":  "Request Id"
+                                                                                                        },
+                                                                                         "retrieval_version":  {
+                                                                                                                   "type":  "string",
+                                                                                                                   "title":  "Retrieval Version"
+                                                                                                               },
+                                                                                         "tenant_id":  {
+                                                                                                           "type":  "string",
+                                                                                                           "title":  "Tenant Id"
+                                                                                                       },
+                                                                                         "answer":  {
+                                                                                                        "type":  "string",
+                                                                                                        "title":  "Answer"
+                                                                                                    },
+                                                                                         "evidence":  {
+                                                                                                          "items":  {
+                                                                                                                        "$ref":  "#/components/schemas/RetrievalEvidence"
+                                                                                                                    },
+                                                                                                          "type":  "array",
+                                                                                                          "title":  "Evidence"
+                                                                                                      },
+                                                                                         "latency_ms":  {
+                                                                                                            "type":  "integer",
+                                                                                                            "minimum":  0.0,
+                                                                                                            "title":  "Latency Ms"
+                                                                                                        },
+                                                                                         "latency":  {
+                                                                                                         "$ref":  "#/components/schemas/RetrievalLatency"
+                                                                                                     },
+                                                                                         "warnings":  {
+                                                                                                          "items":  {
+                                                                                                                        "type":  "string"
+                                                                                                                    },
+                                                                                                          "type":  "array",
+                                                                                                          "title":  "Warnings"
+                                                                                                      }
+                                                                                     },
+                                                                      "additionalProperties":  false,
+                                                                      "type":  "object",
+                                                                      "required":  [
+                                                                                       "query_id",
+                                                                                       "request_id",
+                                                                                       "retrieval_version",
+                                                                                       "tenant_id",
+                                                                                       "answer",
+                                                                                       "evidence",
+                                                                                       "latency_ms",
+                                                                                       "latency"
+                                                                                   ],
+                                                                      "title":  "RetrievalQueryResponse"
+                                                                  },
+                                       "ServiceHealthResponse":  {
+                                                                     "properties":  {
+                                                                                        "status":  {
+                                                                                                       "type":  "string",
+                                                                                                       "enum":  [
+                                                                                                                    "ok",
+                                                                                                                    "degraded"
+                                                                                                                ],
+                                                                                                       "title":  "Status"
+                                                                                                   },
+                                                                                        "service":  {
+                                                                                                        "type":  "string",
+                                                                                                        "title":  "Service"
+                                                                                                    },
+                                                                                        "version":  {
+                                                                                                        "type":  "string",
+                                                                                                        "title":  "Version"
+                                                                                                    },
+                                                                                        "retrieval_ready":  {
+                                                                                                                "type":  "boolean",
+                                                                                                                "title":  "Retrieval Ready"
+                                                                                                            },
+                                                                                        "documents":  {
+                                                                                                          "type":  "integer",
+                                                                                                          "minimum":  0.0,
+                                                                                                          "title":  "Documents"
+                                                                                                      },
+                                                                                        "chunks":  {
+                                                                                                       "type":  "integer",
+                                                                                                       "minimum":  0.0,
+                                                                                                       "title":  "Chunks"
+                                                                                                   }
+                                                                                    },
+                                                                     "additionalProperties":  false,
+                                                                     "type":  "object",
+                                                                     "required":  [
+                                                                                      "status",
+                                                                                      "service",
+                                                                                      "version",
+                                                                                      "retrieval_ready",
+                                                                                      "documents",
+                                                                                      "chunks"
+                                                                                  ],
+                                                                     "title":  "ServiceHealthResponse"
+                                                                 }
+                                   },
+                       "securitySchemes":  {
+                                               "ServiceToken":  {
+                                                                    "type":  "http",
+                                                                    "scheme":  "bearer"
+                                                                }
+                                           }
+                   },
+    "tags":  [
+                 {
+                     "name":  "Service Retrieval API",
+                     "description":  "Health and authenticated retrieval."
+                 }
+             ]
+}

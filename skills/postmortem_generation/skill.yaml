@@ -1,0 +1,9 @@
+apiVersion: devflow.ai/v1
+kind: Skill
+metadata: {id: postmortem_generation, name: Postmortem Generation, version: 1.0.0}
+spec:
+  description: Generate a versioned postmortem draft inside the task sandbox.
+  allowed_tools: [write_report]
+  required_permissions: [workspace:write]
+  risk_level: low_write
+

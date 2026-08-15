@@ -1,0 +1,9 @@
+apiVersion: devflow.ai/v1
+kind: Skill
+metadata: {id: incident_reasoning, name: Incident Reasoning, version: 1.0.0}
+spec:
+  description: Correlate collected evidence into supported hypotheses and explicit unknowns.
+  allowed_tools: [correlate_evidence]
+  required_permissions: [incident:analyze]
+  risk_level: read
+

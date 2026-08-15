@@ -1,0 +1,19 @@
+[
+  {
+    "document_id": "inc_2025_017",
+    "chunk_id": "c_8",
+    "title": "Redis 连接池耗尽复盘",
+    "summary": "高峰期连接未及时释放导致连接池耗尽；症状包括 acquire wait、请求重试和 p95 延迟同时上升。",
+    "source_uri": "knowledge://inc_2025_017#c_8",
+    "score": 0.91
+  },
+  {
+    "document_id": "runbook_redis_04",
+    "chunk_id": "c_2",
+    "title": "Redis 连接故障排查 Runbook",
+    "summary": "先比较 active/max/wait 指标，再检查连接释放逻辑和近期连接池配置变更。",
+    "source_uri": "knowledge://runbook_redis_04#c_2",
+    "score": 0.86
+  }
+]
+

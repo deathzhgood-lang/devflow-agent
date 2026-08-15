@@ -1,0 +1,9 @@
+apiVersion: devflow.ai/v1
+kind: Skill
+metadata: {id: issue_coordination, name: Issue Coordination, version: 1.0.0}
+spec:
+  description: Create a remediation issue only after evidence review and explicit approval.
+  allowed_tools: [create_issue]
+  required_permissions: [git:write]
+  risk_level: high_write
+

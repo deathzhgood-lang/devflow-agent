@@ -1,0 +1,31 @@
+[
+  {
+    "timestamp": "2026-07-18T02:11:02Z",
+    "level": "ERROR",
+    "service": "payment",
+    "trace_id": "tr_718_001",
+    "message": "RedisConnectionError: pool exhausted; active=200 max=200 wait_ms=3000"
+  },
+  {
+    "timestamp": "2026-07-18T02:11:05Z",
+    "level": "WARN",
+    "service": "payment",
+    "trace_id": "tr_718_002",
+    "message": "payment request retry scheduled attempt=3 downstream=redis-session"
+  },
+  {
+    "timestamp": "2026-07-18T02:12:31Z",
+    "level": "ERROR",
+    "service": "payment",
+    "trace_id": "tr_718_003",
+    "message": "request timeout after 5000ms while acquiring redis connection"
+  },
+  {
+    "timestamp": "2026-07-29T09:26:10Z",
+    "level": "ERROR",
+    "service": "payment",
+    "trace_id": "tr_729_001",
+    "message": "RedisConnectionError: transient connection reset by peer"
+  }
+]
+

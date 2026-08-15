@@ -1,0 +1,9 @@
+apiVersion: devflow.ai/v1
+kind: Skill
+metadata: {id: change_correlation, name: Change Correlation, version: 1.0.0}
+spec:
+  description: Find code and configuration changes near an anomaly window; read-only.
+  allowed_tools: [list_commits]
+  required_permissions: [git:read]
+  risk_level: read
+

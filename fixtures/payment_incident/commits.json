@@ -1,0 +1,21 @@
+[
+  {
+    "sha": "a9c4d21",
+    "timestamp": "2026-07-17T16:40:00Z",
+    "author": "demo.engineer",
+    "title": "refactor payment session cleanup",
+    "files": ["services/payment/session.py"],
+    "summary": "Moved connection release into success-only branch; exception path does not release the Redis connection.",
+    "source_uri": "git://payment/a9c4d21"
+  },
+  {
+    "sha": "e18b502",
+    "timestamp": "2026-07-25T11:10:00Z",
+    "author": "demo.sre",
+    "title": "tune redis keepalive",
+    "files": ["deploy/payment/values.yaml"],
+    "summary": "Adjusted keepalive interval; unrelated to connection release behavior.",
+    "source_uri": "git://payment/e18b502"
+  }
+]
+

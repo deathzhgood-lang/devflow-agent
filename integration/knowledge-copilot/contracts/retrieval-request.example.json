@@ -1,0 +1,18 @@
+{
+  "query": "登录接口持续返回 401，应该如何排查？",
+  "tenant_id": "local-demo",
+  "user_id": "devflow-user-001",
+  "groups": [
+    "engineering"
+  ],
+  "filters": {
+    "service": "auth-service",
+    "document_types": [
+      "runbook"
+    ],
+    "tags": []
+  },
+  "top_k": 5,
+  "request_id": "req_devflow_example_001"
+}
+

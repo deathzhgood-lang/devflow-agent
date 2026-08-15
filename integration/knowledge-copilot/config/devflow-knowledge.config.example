@@ -1,0 +1,8 @@
+# Copy these field names into the DevFlow server-side secret/config system.
+# This file contains placeholders only and is not an .env file.
+KNOWLEDGE_API_ORIGIN=https://knowledge-api.internal.example
+KNOWLEDGE_SERVICE_TOKEN=SET_IN_DEVFLOW_SECRET_STORE
+KNOWLEDGE_TENANT_ID=local-demo
+KNOWLEDGE_TIMEOUT_MS=35000
+KNOWLEDGE_DEFAULT_GROUPS=engineering
+

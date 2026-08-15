@@ -1,0 +1,39 @@
+{
+  "query_id": "q_example_001",
+  "request_id": "req_devflow_example_001",
+  "retrieval_version": "2026-08-13",
+  "tenant_id": "local-demo",
+  "answer": "先确认令牌签发方、受众和时钟偏差，再检查网关是否转发认证头。",
+  "evidence": [
+    {
+      "chunk_id": "chunk_example_001",
+      "document_id": "doc_example_001",
+      "title": "authentication-runbook.md",
+      "quote": "排查 401 时应依次检查令牌有效期、签发方、受众、时钟偏差以及网关认证头转发。",
+      "source_uri": "knowledge://doc_example_001#chunk=chunk_example_001",
+      "score": 0.91,
+      "document_type": "runbook",
+      "metadata": {
+        "service": "auth-service",
+        "heading": "401 故障排查",
+        "page_start": 1,
+        "page_end": 1,
+        "updated_at": "2026-08-01",
+        "tags": [
+          "authentication"
+        ],
+        "untrusted_retrieved_content": true
+      }
+    }
+  ],
+  "latency_ms": 128,
+  "latency": {
+    "total_ms": 128,
+    "retrieval_ms": 101,
+    "reranker_ms": 24
+  },
+  "warnings": [
+    "extractive_answer"
+  ]
+}
+

@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+.env
+runtime_data/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+*.tsbuildinfo
+.cache/
+.tools/

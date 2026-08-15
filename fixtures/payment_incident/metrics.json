@@ -1,0 +1,22 @@
+{
+  "service": "payment",
+  "period_days": 30,
+  "baseline_error_rate": 0.008,
+  "anomalies": [
+    {
+      "timestamp": "2026-07-18T02:10:00Z",
+      "duration_minutes": 42,
+      "error_rate": 0.127,
+      "p95_latency_ms": 1840,
+      "affected_requests": 8421
+    },
+    {
+      "timestamp": "2026-07-29T09:25:00Z",
+      "duration_minutes": 18,
+      "error_rate": 0.063,
+      "p95_latency_ms": 960,
+      "affected_requests": 1930
+    }
+  ]
+}
+

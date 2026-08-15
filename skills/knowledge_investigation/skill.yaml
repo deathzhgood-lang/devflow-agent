@@ -1,0 +1,9 @@
+apiVersion: devflow.ai/v1
+kind: Skill
+metadata: {id: knowledge_investigation, name: Knowledge Investigation, version: 1.0.0}
+spec:
+  description: Retrieve historical incident and runbook evidence through the knowledge service.
+  allowed_tools: [search_knowledge]
+  required_permissions: [knowledge:read]
+  risk_level: read
+

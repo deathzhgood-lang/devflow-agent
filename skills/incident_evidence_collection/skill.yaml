@@ -1,0 +1,9 @@
+apiVersion: devflow.ai/v1
+kind: Skill
+metadata: {id: incident_evidence_collection, name: Incident Evidence Collection, version: 1.0.0}
+spec:
+  description: Collect redacted logs for a bounded incident window; read-only.
+  allowed_tools: [search_logs]
+  required_permissions: [observability:read]
+  risk_level: read
+
